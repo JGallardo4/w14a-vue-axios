@@ -1,6 +1,6 @@
 <template>
   <section id="jokes">
-    <my-button>Load new joke</my-button>
+    <my-button id="refresh-button">Load new joke</my-button>
 
     <section id="joke-tabs-container">
       <div id="tabs-container">
@@ -14,10 +14,7 @@
         </button>
       </div>
 
-      <component v-bind:is="currentTabComponent" class="joke">
-        <p>
-          {{ joke }}
-        </p>
+      <component v-bind:is="currentTabComponent" class="joke" :joke="this.joke">
       </component>
     </section>
   </section>
@@ -79,6 +76,21 @@ export default {
   padding: 2rem;
   gap: 1rem;
 
+  #refresh-button {
+    @include resetButton;
+    place-self: center;
+    background-color: darkblue;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    &:hover {
+      background-color: #2946c5;
+    }
+    &:active {
+      background-color: #29c56a;
+    }
+  }
+
   #joke-tabs-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -86,7 +98,6 @@ export default {
     border-style: solid;
     border-width: 1px;
     border-color: black;
-    gap: 1rem;
 
     #tabs-container {
       grid-row: 1;
@@ -112,6 +123,7 @@ export default {
       min-height: 50vh;
       display: grid;
       place-items: center;
+      padding: 2rem;
     }
   }
 }

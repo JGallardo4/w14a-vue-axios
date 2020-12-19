@@ -1,10 +1,17 @@
 <template>
-  <article><slot></slot></article>
+  <article>
+    <p>{{ joke }}</p>
+  </article>
 </template>
 
 <script>
 export default {
   name: "normal-joke",
+  props: {
+    joke: {
+      type: String,
+    },
+  },
 };
 </script>
 
