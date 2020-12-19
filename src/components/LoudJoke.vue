@@ -1,5 +1,5 @@
 <template>
-  <article><h1>Loud joke</h1></article>
+  <article><slot></slot></article>
 </template>
 
 <script>

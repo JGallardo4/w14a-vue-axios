@@ -14,7 +14,11 @@
         </button>
       </div>
 
-      <component v-bind:is="currentTabComponent" class="joke"></component>
+      <component v-bind:is="currentTabComponent" class="joke">
+        <p>
+          {{ joke }}
+        </p>
+      </component>
     </section>
   </section>
 </template>
@@ -43,7 +47,11 @@ export default {
   },
 
   computed: {
-    currentTabComponent: function() {
+    joke() {
+      return this.$store.getters.getJoke;
+    },
+
+    currentTabComponent() {
       return this.currentTab
         .toLowerCase()
         .split(" ")
@@ -54,6 +62,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin resetButton() {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
 #jokes {
   display: grid;
   grid-template-columns: 1fr;
@@ -66,12 +84,27 @@ export default {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     border-style: solid;
-    border-width: 2px;
+    border-width: 1px;
     border-color: black;
+    gap: 1rem;
 
     #tabs-container {
       grid-row: 1;
       display: flex;
+      border-bottom: solid 1px black;
+      button {
+        @include resetButton;
+        padding: 1rem;
+        border-right: solid 1px black;
+
+        &:hover {
+          background-color: gainsboro;
+        }
+
+        &.active {
+          background-color: lightblue;
+        }
+      }
     }
 
     .joke {
